@@ -40,7 +40,7 @@ Ljubljana, \letnica}
 
 V projektni nalogi si bova natančneje ogledala naključne sprehode v grafih oblike lizike.
 Za vhodni podatek bova vzela graf lizike, to je graf podan s parom $(m,n)$, 
-kjer je $m$ število vozlišč pri katerih ima graf obliko polnega grafa, 
+kjer je $m$ število vozlišč, pri katerih ima graf obliko polnega grafa, 
 $n$ pa je število vozlišč, na katerih ima graf obliko poti. Oba dela grafa sta povezana z mostom.
 Naloga projekta je v takšnih grafih poiskati pričakovani čas, 
 \begin{itemize}
@@ -67,7 +67,7 @@ sosednje vozlišče z verjetnostjo $\frac{1}{d(v)}$ in to se nadaljuje tako dolg
 V primeru grafa lizike ima $d(v)$ dve možni vrednosti. Če se nahajamo na
 delu grafu, ki je v obliki poti, ima vsako vozlišče dva soseda, in je verjetnost, da
 se pomaknemo na naslednjem koraku v sosednje vozlišče vedno $\frac{1}{2}$. V drugem primeru, ko se začetno vozlišče nahaja na
-polnem grafu, pa je verjetnost enaka $\frac{1}{m}$. 
+polnem grafu, pa je verjetnost enaka $\frac{1}{m-1}$. 
 
 \textbf{Čas pokritja} za vozlišče $u$, označimo z $C_u$, je čas oziroma število korakov, da obiščemo vsa vozlišča ob začetku v $u$.
 Čas pokritja grafa pa je maksimum $C_u$ za vsa vozlišča $u$ v grafu $G$.
