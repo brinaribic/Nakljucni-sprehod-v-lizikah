@@ -377,4 +377,93 @@ Ker je na oko težko oceniti pričakovani čas, si pomagamo z grafi.
 Z $n$-jem se čas veča linearno, z $m$-jem pa kvadratično. Pričakovani čas vrnitve je približno $\mathcal{O}(m^2+n)$
 
 
+\section{Modifikacije grafa lizike}
+V tem poglavju bova na podoben način kot sva analizirala graf v obliki lizike, analizirala še nekoliko spremenjen graf. 
+Najprej bova pogledala, kako se spreminijo čas pokritja, čas dosega in čas vrnitve, 
+če dodamo na vsako vozlišče v kliki pot dolžine $n$ (graf v obliki sonca).
+Nadalje bova enako analizo naredila še za graf, ki ima na začetku in koncu poti kliko z $m$ vozlišči. 
+Meniva, da pri drugem grafu večjih sprememb glede na graf lizike ne bo, tudi časi se naj ne bi bistveno spremenili.
+Pri grafu sonca bodo morda vsi časi nekoliko višji, saj bo trajalo dlje časa, da pridemo na konec vseh poti.
+
+\subsection{Graf sonca}
+
+Kot že omenjeno, bova najprej analizirala graf sonca. 
+To je graf s kliko na $m$ vozliščih in na vsakem vozlišču je pot na $n$ vozliščih. Za čas pokritja je enako kot
+pri grafu lizike pomembno katero začetno vozlišče si izbereva. Po podobnem premisleku kot prej, sva ugotovila, da dobiva
+najdaljši čas pokritja, če začneva na kliki. Spodnji graf prikazuje, kako se je čas pokritja spreminjal, pri izbranih $n$
+in naraščajočem $m$.
+
+\begin{figure}
+%    \includegraphics[scale=0.8]{pokritje_sonce_n.png}
+\end{figure}
+
+Opaziva, da se časi spreminjajo priblično kvadratično z večanjem $m$. 
+Da bova lahko ocenila dejanski čas pokritja,
+morava še preučiti, kako se spreminjajo časi pri fiksnem $m$ in naraščajočem $n$. To pa prikazuje drugi graf.
+
+\begin{figure}
+%    \includegraphics[scale=0.8]{pokritje_sonce_m.png}
+\end{figure}
+
+V tem primeru se časi povečujejo nekoliko počasneje, vendar še vedno kvadratično, ob hkratnem povečevanju $n$. 
+To hipotezo sva potrdila tudi z dejanskimi izračuni. 
+Do odstopanj pride zgolj zaradi 
+morebitnega premajhnega števila ponovitev. Torej je pričakovani čas pokritja grafa v obliki sonca enak  $\mathcal{O}(n^2m^2)$. Za primerjavo,
+pri navadnem grafu lizike je bil ta čas $\mathcal{O}(m^2n)$. To je precej logično, saj smo v prvotni graf lizike dodali nove poti in le-te
+sedaj povečujejo pričakovani čas pokritja. 
+
+Nadalje sva na istem tipu grafa preučila čas dosega. Tudi tukaj sva sklepala, da se bo čas dosega povečal glede na navaden graf lizike.
+V spodnjih dveh grafih je prikazan čas dosega, če fiksiramo najprej $n$ in potem še $m$, zaporedoma. V obeh primerih sva začela na kliki
+in končala tudi na kliki.
+
+
+\begin{figure}[!tbp]
+    \centering
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=\textwidth]{doseg_sonce_n.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=\textwidth]{doseg_sonce_m.png}
+    \end{minipage}
+  \end{figure}
+
+Glede na zgornja grafa meniva, da je čas dosega v tem primeru enak $\mathcal{O}(n^2m)$. Po podobnem 
+razmisleku kot zgoraj, je čas dosega odvisen od tega v katerem vozlišču začneva in končava. Pogledala sva si še, 
+kakšen je čas dosega, če začneva na poljubni poti. To prikazujeta spodnja grafa.
+
+\begin{figure}[!tbp]
+    \centering
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=\textwidth]{doseg_sonce1_n.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=\textwidth]{doseg_sonce1_m.png}
+    \end{minipage}
+  \end{figure}
+
+  Iz prvega grafa je razvidno, da velikost klike ne vpliva bistveno na velikost časa dosega. 
+  V drugem primeru se ob povečevanju poti, čas dosega 
+  povečuje linearno. Sklepava, da je čas dosega v tem primeru enak $\mathcal{O}(m+\log(n))$.
+
+  Za konec sva si pogledala še, kakšen je čas vrnitve v grafu sonca, če začneva na kliki. Zopet sva ločila primera, kje najprej fiksirava $n$ in potem
+  še $m$. Tukaj se čas spreminjata linearno, ko $n$ raste in prav tako, ko $m$ raste. Čas vrnitve za sonce je $\mathcal{O}(mn)$.
+  Podoben ramzislek je, če začneva na koncu poti, ali pa na vozlišču, ki je del mosta.
+
+  \begin{figure}[!tbp]
+    \centering
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=\textwidth]{vrnitev_sonce_n.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=\textwidth]{vrnitev_sonce_m.png}
+    \end{minipage}
+  \end{figure}
+
+  \section{Primerjava grafov}
+
+
+
 \end{document}
