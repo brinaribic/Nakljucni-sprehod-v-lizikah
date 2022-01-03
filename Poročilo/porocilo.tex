@@ -376,93 +376,132 @@ Ker je na oko težko oceniti pričakovani čas, si pomagamo z grafi.
 
 Z $n$-jem se čas veča linearno, z $m$-jem pa kvadratično. Pričakovani čas vrnitve je približno $\mathcal{O}(m^2+n)$
 
+\section{Primerjava grafov}
 
-\section{Modifikacije grafa lizike}
-V tem poglavju bova na podoben način kot sva analizirala graf v obliki lizike, analizirala še nekoliko spremenjen graf. 
-Najprej bova pogledala, kako se spreminijo čas pokritja, čas dosega in čas vrnitve, 
-če dodamo na vsako vozlišče v kliki pot dolžine $n$ (graf v obliki sonca).
-Nadalje bova enako analizo naredila še za graf, ki ima na začetku in koncu poti kliko z $m$ vozlišči. 
-Meniva, da pri drugem grafu večjih sprememb glede na graf lizike ne bo, tudi časi se naj ne bi bistveno spremenili.
-Pri grafu sonca bodo morda vsi časi nekoliko višji, saj bo trajalo dlje časa, da pridemo na konec vseh poti.
+Primerjala sva različne tipe časov pri grafu lizike, grafu sonca in grafu s kliko na obeh koncih poti.
+Graf sonca dobimo, če na vsako vozlišče na kliki dodamo pot dolžine $n$, graf s kliko na obeh koncih poti pa, če grafu lizike
+dodamo še eno kliko na koncu poti.
 
-\subsection{Graf sonca}
+\subsection{Čas pokritja}
 
-Kot že omenjeno, bova najprej analizirala graf sonca. 
-To je graf s kliko na $m$ vozliščih in na vsakem vozlišču je pot na $n$ vozliščih. Za čas pokritja je enako kot
-pri grafu lizike pomembno katero začetno vozlišče si izbereva. Po podobnem premisleku kot prej, sva ugotovila, da dobiva
-najdaljši čas pokritja, če začneva na kliki. Spodnji graf prikazuje, kako se je čas pokritja spreminjal, pri izbranih $n$
-in naraščajočem $m$.
+Najprej sva primerjala čas pokritja. Graf sonca ima največji čas, kar je pričakovano, saj veliko poti zelo 
+povečuje čas pokritja, kljub temu, da imamo na poti samo dve izbiri za naslednje vozlišče. Presentilo naju je,
+da se čas pokritja ne poveča toliko, če dodamo grafu lizike na konec poti še eno kliko, saj se veliko časa porabi ravno na kliki, 
+ker imamo toliko izbir za naslednji korak. Spodnji graf prikazuje, kako se spreminjajo ti časi glede na izbrane $n$.
 
-\begin{figure}
-%    \includegraphics[scale=0.8]{pokritje_sonce_n.png}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{primerjava_pokritje_n.png}
 \end{figure}
 
-Opaziva, da se časi spreminjajo priblično kvadratično z večanjem $m$. 
-Da bova lahko ocenila dejanski čas pokritja,
-morava še preučiti, kako se spreminjajo časi pri fiksnem $m$ in naraščajočem $n$. To pa prikazuje drugi graf.
+Če fiksirava še $m$, zopet izstopajo časi pri grafu sonca, ki se zelo hitro povečujejo. 
+To prikazuje spodnji graf. Še enkrat bi poudarila, da je pomembno v katerem 
+vozlišču začneva. Hitro sva ugotovila, da je pri vseh treh grafih najbolj smiselno, da začneva na kliki. Glede na analizo, ki sva jo naredila,
+sva ocenila, da je čas pokritja za sonce $\mathcal{O}(n^2m^2)$, za graf lizike pa je bil $\mathcal{O}(m^2n)$. To je smiselno, saj 
+se čas pokritja za graf sonca res hitreje povečuje kot pri ostalih dveh grafih. Za graf s klikama na obeh koncih poti, 
+sva opazila, da se čas pokritja povečuje podobno kot čas pokritja pri grafu lizike, zato sklepava, da je čas pokritja v tem grafu enak
+$\mathcal{O}(m^2n)$.
 
-\begin{figure}
-%    \includegraphics[scale=0.8]{pokritje_sonce_m.png}
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{primerjava_pokritje_m.png}
 \end{figure}
 
-V tem primeru se časi povečujejo nekoliko počasneje, vendar še vedno kvadratično, ob hkratnem povečevanju $n$. 
-To hipotezo sva potrdila tudi z dejanskimi izračuni. 
-Do odstopanj pride zgolj zaradi 
-morebitnega premajhnega števila ponovitev. Torej je pričakovani čas pokritja grafa v obliki sonca enak  $\mathcal{O}(n^2m^2)$. Za primerjavo,
-pri navadnem grafu lizike je bil ta čas $\mathcal{O}(m^2n)$. To je precej logično, saj smo v prvotni graf lizike dodali nove poti in le-te
-sedaj povečujejo pričakovani čas pokritja. 
+Ogledala sva si še, kaj se zgodi, če izbereva napačno vozlišče na začetku. Na spodnjem grafu je prikazano, kakšni so časi, če 
+fiksirava $m$. Pri grafu sonca ni tako velikih sprememb, le časi nekoliko počasneje naraščajo. Pri ostalih dveh grafih, so pa časi
+nižji, kot če izbereva vozlišče na kliki. Opaziva tudi, da se čas pokritja za graf s kliko na obeh koncih drugače povečuje kot se je prej.
+V tem primeru ni podobno grafu liziki.
 
-Nadalje sva na istem tipu grafa preučila čas dosega. Tudi tukaj sva sklepala, da se bo čas dosega povečal glede na navaden graf lizike.
-V spodnjih dveh grafih je prikazan čas dosega, če fiksiramo najprej $n$ in potem še $m$, zaporedoma. V obeh primerih sva začela na kliki
-in končala tudi na kliki.
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{napacna_pokritje_m.png}
+\end{figure}
 
+\subsection{Čas dosega}
+\subsubsection{Vozlišča v kliki}
 
-\begin{figure}[!tbp]
-    \centering
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=\textwidth]{doseg_sonce_n.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=\textwidth]{doseg_sonce_m.png}
-    \end{minipage}
-  \end{figure}
+Pri analizi grafa lizike sva ločila primere, glede na to ali je vozlišče na polnem grafu del mostu. Pri soncu
+tega ni bilo potrebno narediti, saj so vsa vozlišča v kliki del mostu. Če pa grafu lizike dodava še kliko na drugem koncu poti,
+morava zopet ločiti primere, ali je vozlišče del mostu ali ne.
 
-Glede na zgornja grafa meniva, da je čas dosega v tem primeru enak $\mathcal{O}(n^2m)$. Po podobnem 
-razmisleku kot zgoraj, je čas dosega odvisen od tega v katerem vozlišču začneva in končava. Pogledala sva si še, 
-kakšen je čas dosega, če začneva na poljubni poti. To prikazujeta spodnja grafa.
+Spodnja dva grafa prikazujeta kako sta se spreminjala časa dosega pri grafu lizike in grafu s kliko na koncih poti, kjer 
+sva za začetno vozlišče izbrala vozlišče, ki ni del mostu, najprej
+v odvisnosti od $m$ in pri fiksnem $n$, nato še obratno. 
 
-\begin{figure}[!tbp]
-    \centering
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=\textwidth]{doseg_sonce1_n.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=\textwidth]{doseg_sonce1_m.png}
-    \end{minipage}
-  \end{figure}
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{primerjava_doseg_n.png}
+\end{figure}
 
-  Iz prvega grafa je razvidno, da velikost klike ne vpliva bistveno na velikost časa dosega. 
-  V drugem primeru se ob povečevanju poti, čas dosega 
-  povečuje linearno. Sklepava, da je čas dosega v tem primeru enak $\mathcal{O}(m+\log(n))$.
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{primerjava_doseg_m.png}
+\end{figure}
 
-  Za konec sva si pogledala še, kakšen je čas vrnitve v grafu sonca, če začneva na kliki. Zopet sva ločila primera, kje najprej fiksirava $n$ in potem
-  še $m$. Tukaj se čas spreminjata linearno, ko $n$ raste in prav tako, ko $m$ raste. Čas vrnitve za sonce je $\mathcal{O}(mn)$.
-  Podoben ramzislek je, če začneva na koncu poti, ali pa na vozlišču, ki je del mosta.
+Ko je $n$ fiksen, se čas dosega pri grafu z dvema klikama pri velikih $m$ hitreje povečuje, vendar
+še vedno linearno, kot pri grafu lizike. 
+Pri fiksnem $m$, pa je čas dosega skoraj neodvisen za velike klike ob spreminjanju $n$. Ker se vrednosti pri obeh
+grafih spreminjajo skoraj enako, le da so pri grafu z dvema klikama nekoliko večje lahko sklepava, da je čas dosega
+za ta graf enak kar času dosega grafa lizike, tj. $\mathcal{O}(m+\log(n))$.
 
-  \begin{figure}[!tbp]
-    \centering
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=\textwidth]{vrnitev_sonce_n.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=\textwidth]{vrnitev_sonce_m.png}
-    \end{minipage}
-  \end{figure}
+Naprej sva analizirala, kakšen je čas dosega, če spremeniva začetno vozlišče. V naslednjem primeru je torej 
+začetno vozlišče del mostu, še vedno pa je končno del klike. Spodnji graf prikazuje, kako se je spreminjal čas dosega, če fiksirava
+$n$. Pričakovala sva, da bodo za oba grafa zopet podobni rezultati, vendar se čas pokritja za graf z dvema klikama bistveno hitreje
+povečuje. Razlog bi morda bil, ker sva začela na vozlišču ob mostu, je v naslednjem koraku z  verjetnostjo $0,5$ na poti in 
+se lahko hitro zgodi, da pride do druge klike, kar pa močno poveča čas, da se vrne na prvotno kliko in potem še tam do 
+končnega vozlišča.
 
-  \section{Primerjava grafov}
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{primerjava_doseg1_n.png}
+\end{figure}
+
+Da bova lahko ocenila dejanski čas dosega, si morava pogledati še, kako se spreminja čas, če fiksirava $m$. To je razvidno iz spodnjega
+grafa. V tem primeru, so vrednosti pri grafu z dvema klikama višje, spreminjajo pa se podobno kot pri grafu lizike.
+Napisala sva že, da je čas dosega za graf lizike v tem primeru tudi $\mathcal{O}(m+\log(n))$, za graf s klikama na obeh koncih poti
+pa se spremeni na $\mathcal{O}(mn)$.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{primerjava_doseg1_m.png}
+\end{figure}
+
+\subsubsection{Od vrha do dna in obratno}
+
+Tu sva si izbrala začetno vozlišče na kliki, ki ni del mostu in pa končno na koncu poti. V tem primeru lahko primerjava
+graf lizike in graf s kliko na obeh koncih poti, saj je čas dosega enak v obeh primerih. Torej je v tem primeru za oba grafa
+čas dosega $\mathcal{O}(m^2n)$. če pogledava še obratno in sicer, da začneva na koncu poti in končava na kliki. V tem primeru se lahko zgodi,
+da pri grafu z dvema klikama, že na začetku izberemo vozlišče, tako da se približamo drugi kliki. Sklepava, da bi bil v tem primeru,
+čas dosega večji in bi se drugače spreminjal kot pri grafu lizike.
+
+\subsection{Čas vrnitve}
+
+Za konec sva primerjala še čas vrnitve v začetno vozlišče pri grafu lizike in grafu s kliko na obeh koncih poti. 
+Zopet bova ločila primere, glede na to, ali je vozlišče v kliki in del mostu ali ni del mostu.
+
+\subsubsection{Vozlišče v kliki, ki ni del mostu}
+Pri grafu lizike sva dobila zelo podobne rezultate kot pri času dosega, ko nisva izbrala začetnega vozlišča na mostu. 
+Preverila sva, da pri grafu s klikama na obeh koncih dobiva zelo podobne čase vrnitve kot pri grafu lizike, zgolj
+nekoliko večje, gibajo pa se podobno. Sledi, da je tudi končna ocena v tem primeru za čas vrnitve enaka.
+
+\subsubsection{Vozlišče v kliki, ki je del mostu}
+Pri grafu lizike so bili rezultati zelo podobni kot v prejšnjem primeru, zato sklepava, da bodo tudi pri grafu z dvema klikava.
+To sva tudi preverila in je res tako. Edina razlika je, da so zopet nekoliko višji. Torej je v obeh primerih čas vrnitve enak
+$\mathcal{O}(m+\log(n))$.
+
+\subsubsection{Vozlišče na koncu poti}
+
+V tem primeru bo prišlo do razlik med grafoma, saj je pri grafu s klikama $50 \%$ možnosti, da gremo v kliko in potem šele nazaj v 
+začetno vozlišče. Pričakujeva, da se bo čas vrnitve zaradi tega povečal ob fiksnem $n$, saj se bo s tem povečevala klika in posledično
+bomo potrebovali dlje časa, da pridemo v začetno vozlišče. Ob fiksnem $m$ pa pričakujeva, da ne bo večjih sprememb. 
+Te ugotovitve prikazujeta spodnja grafa.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{vrnitev_n.png}
+\end{figure}
+
+Kljub temu, da sva pričakovala višji čas, ko se $m$ povečuje, sva bila presenečena, da bo razlika tako velika.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{vrnitev_m.png}
+\end{figure}
+
+Na zgornjem grafu se nama je zdelo zanimivo, da je čas vrnitve pri večji $m$ bistveno večji kot pri manjših. Pri grafu lizike
+ni velikih razlik, ko spreminjamo $m$. Pri $m=3$ je zelo mala razlika med časoma vrnitve pri obeh grafih. Razlog za to je, da je 
+klika majhna in hitro pridemo nazaj v začetno vozlišče.
 
 
 
